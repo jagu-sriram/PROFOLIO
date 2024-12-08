@@ -1,0 +1,198 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e8f1f9, #fefeff);
+    color: #34495e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Wrapper Styling */
+.accept-wrapper {
+    width: 100%;
+    max-width: 800px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    background: #3498db;
+    color: #fff;
+    padding: 20px 0;
+    margin-bottom: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Section Styling */
+.info-section {
+    background: #f9fafc;
+    padding: 25px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.info-item label {
+    font-weight: bold;
+    color: #2c3e50;
+    width: 35%;
+}
+
+.info-item span {
+    color: #555;
+    background: #eef5fb;
+    padding: 8px 12px;
+    border-radius: 6px;
+    flex: 1;
+    text-align: center;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Section Styling */
+.form-section {
+    padding: 25px;
+    background: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+select, textarea {
+    padding: 12px 15px;
+    border: 1px solid #dcdfe3;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background: #fafbfc;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+select:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Buttons Styling */
+.form-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    background: #2ecc71;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background: #27ae60;
+    transform: translateY(-3px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .accept-wrapper {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .info-item label {
+        width: 45%;
+        font-size: 14px;
+    }
+
+    .info-item span {
+        font-size: 14px;
+    }
+
+    select, textarea {
+        font-size: 14px;
+    }
+
+    .btn-submit {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Reject Milestone Specific Styles */
+.reject-wrapper h1 {
+    background: #e74c3c; /* Red tone for rejection page header */
+}
+
+.reject-btn {
+    background: #e74c3c; /* Red button for rejection action */
+}
+
+.reject-btn:hover {
+    background: #c0392b;
+}
+
+/* Optional: Distinctive Feedback Section Styling for Rejection */
+.reject-wrapper .form-group textarea {
+    border-color: #e74c3c; /* Red border for feedback textarea */
+}
+
+.reject-wrapper .form-group textarea:focus {
+    outline-color: #c0392b; /* Darker red focus outline */
+}
+
+

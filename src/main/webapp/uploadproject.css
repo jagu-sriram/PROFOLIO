@@ -1,0 +1,197 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Body configuration */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f9;
+  overflow-x: hidden;
+}
+
+/* Container for the form */
+.container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+
+.container .form {
+  margin-top: 30px;
+}
+
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.input-box label {
+  color: #333;
+}
+
+.form input, .form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #707070;
+}
+
+.input-box input:focus, .input-box textarea:focus {
+  border-color: #0c5df4;
+  outline: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form button {
+  height: 50px;
+  width: 100%;
+  background-color: rgb(130, 106, 251);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: rgb(88, 56, 250);
+}
+
+/* Navbar styles */
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--nav-width);
+  height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 100;
+  transition: width 0.3s ease;
+}
+
+.body-pd {
+  padding-left: var(--nav-width);
+}
+
+.expander .l-navbar {
+  width: calc(var(--nav-width) + 200px);
+}
+
+/* Optional transition for navbar expanding */
+.expander .container {
+  transition: margin-left 0.3s ease;
+}
+/* Styling specifically for checkboxes */
+.input-box input[type="checkbox"] {
+  appearance: none; /* Remove default browser styles */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 4px; /* Subtle rounding */
+  background-color: #f4f4f9; /* Neutral background color */
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.input-box input[type="checkbox"]:checked {
+  background-color: #0c5df4; /* Blue background when checked */
+  border-color: #0c5df4;
+}
+
+.input-box input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: translate(5px, 5px) rotate(-45deg);
+}
+
+.input-box input[type="checkbox"]:hover {
+  box-shadow: 0 2px 8px rgba(12, 93, 244, 0.2);
+}
+
+/* Label styles remain unchanged */
+/* Specific styling for images within the form */
+.form img {
+  max-width: 100px; /* Ensure it fits neatly in the form */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Subtle rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  margin-top: 10px; /* Space above the image */
+}
+
+.form img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  transition: transform 0.3s ease;
+}
+
+/* Styling specifically for checkboxes within .input-box */
+.input-box input[type="checkbox"] {
+  appearance: none; /* Remove default browser styles */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd; /* Border for the box */
+  border-radius: 4px; /* Slightly rounded edges */
+  background-color: #f4f4f9; /* Neutral background */
+  position: relative; /* For the tick mark positioning */
+  cursor: pointer; /* Indicate interactivity */
+  display: inline-block; /* Align properly with the label */
+  transition: all 0.3s ease;
+}
+
+.input-box input[type="checkbox"]:checked {
+  background-color: #0c5df4; /* Blue when checked */
+  border-color: #0c5df4; /* Match border to background */
+}
+
+.input-box input[type="checkbox"]:checked::after {
+  content: ''; /* Tick mark */
+  position: absolute;
+  top: 4px; /* Adjust for centering */
+  left: 6px; /* Adjust for centering */
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg); /* Create the checkmark */
+}
+
+.input-box input[type="checkbox"]:hover {
+  box-shadow: 0 2px 8px rgba(12, 93, 244, 0.2); /* Subtle hover effect */
+}
+
+/* Label styles */
+.input-box label {
+  color: #333;
+  font-weight: 500;
+  margin-left: 8px; /* Space between checkbox and label */
+  cursor: pointer;
+}
