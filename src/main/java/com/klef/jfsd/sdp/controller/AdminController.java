@@ -363,19 +363,19 @@ public class AdminController
 	    return mv;          
 	  }
 
-	  @PostMapping("insertstudentcsv")
-	  public ModelAndView uploadstudentcsvFile(HttpServletRequest request,@RequestParam("file") MultipartFile file) {
-	  	
-	      ModelAndView mv=new ModelAndView("addstudentcsv");
-	      HttpSession session = request.getSession(false); 
-	      
-	    
-	       String msg = adminService.saveStudentcsv(file);
-	       mv.addObject("message", msg);
-	   
-	     return mv;
-	    
-	  }
+//	  @PostMapping("insertstudentcsv")
+//	  public ModelAndView uploadstudentcsvFile(HttpServletRequest request,@RequestParam("file") MultipartFile file) {
+//	  	
+//	      ModelAndView mv=new ModelAndView("addstudentcsv");
+//	      HttpSession session = request.getSession(false); 
+//	      
+//	    
+//	       String msg = adminService.saveStudentcsv(file);
+//	       mv.addObject("message", msg);
+//	   
+//	     return mv;
+//	    
+//	  }
 
 	  @GetMapping("addmentorcsv")
 	  public ModelAndView addmentorcsv()
@@ -385,19 +385,19 @@ public class AdminController
 	    return mv;          
 	  }
 
-	  @PostMapping("insertmentorcsv")
-	  public ModelAndView uploadmentorcsvFile(HttpServletRequest request,@RequestParam("csvfile") MultipartFile file) {
-	  	
-	      ModelAndView mv=new ModelAndView("addmentorcsv");
-	      HttpSession session = request.getSession(false); 
-	      
-	    
-	       String msg = adminService.saveMentorcsv(file);
-	       mv.addObject("message", msg);
-	   
-	     return mv;
-	    
-	  }
+//	  @PostMapping("insertmentorcsv")
+//	  public ModelAndView uploadmentorcsvFile(HttpServletRequest request,@RequestParam("csvfile") MultipartFile file) {
+//	  	
+//	      ModelAndView mv=new ModelAndView("addmentorcsv");
+//	      HttpSession session = request.getSession(false); 
+//	      
+//	    
+//	       String msg = adminService.saveMentorcsv(file);
+//	       mv.addObject("message", msg);
+//	   
+//	     return mv;
+//	    
+//	  }
 	  
 	  @GetMapping("viewallmentors")
 		public ModelAndView viewallmentors()

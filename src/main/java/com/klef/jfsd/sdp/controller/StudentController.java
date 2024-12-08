@@ -23,24 +23,24 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.colors.ColorConstants;
-import com.itextpdf.kernel.colors.DeviceRgb;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.borders.SolidBorder;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.LineSeparator;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.properties.BorderRadius;
-import com.itextpdf.layout.properties.TextAlignment;
-import com.itextpdf.layout.properties.UnitValue;
+//import com.itextpdf.io.image.ImageData;
+//import com.itextpdf.io.image.ImageDataFactory;
+//import com.itextpdf.kernel.colors.ColorConstants;
+//import com.itextpdf.kernel.colors.DeviceRgb;
+//import com.itextpdf.kernel.font.PdfFont;
+//import com.itextpdf.kernel.font.PdfFontFactory;
+//import com.itextpdf.kernel.pdf.PdfWriter;
+//import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
+//import com.itextpdf.layout.Document;
+//import com.itextpdf.layout.borders.SolidBorder;
+//import com.itextpdf.layout.element.Cell;
+//import com.itextpdf.layout.element.Image;
+//import com.itextpdf.layout.element.LineSeparator;
+//import com.itextpdf.layout.element.Paragraph;
+//import com.itextpdf.layout.element.Table;
+//import com.itextpdf.layout.properties.BorderRadius;
+//import com.itextpdf.layout.properties.TextAlignment;
+//import com.itextpdf.layout.properties.UnitValue;
 import com.klef.jfsd.sdp.model.CustomMilestone;
 import com.klef.jfsd.sdp.model.CustomMilestone.Status;
 import com.klef.jfsd.sdp.model.Media;
@@ -445,190 +445,190 @@ public class StudentController
 	      return mv;
 	  }
 	  
-	  @GetMapping("portfolio-pdf")
-	  public void generatePortfolioPdf(HttpServletRequest request, HttpServletResponse response) {
-	      HttpSession session = request.getSession();
-	      Student student = (Student) session.getAttribute("student");
-
-	      try {
-	          Portfolio portfolio = studentService.findPortfolioByStudent(student);
-	          response.setContentType("application/pdf");
-	          response.setHeader("Content-Disposition", "attachment; filename=" + student.getLastname() + "_portfolio.pdf");
-
-	          OutputStream out = response.getOutputStream();
-	          PdfWriter writer = new PdfWriter(out);
-	          Document document = new Document(new com.itextpdf.kernel.pdf.PdfDocument(writer));
-
-	          // Fonts
-	          PdfFont titleFont = PdfFontFactory.createFont("Helvetica-Bold");
-	          PdfFont sectionFont = PdfFontFactory.createFont("Helvetica");
-	          PdfFont textFont = PdfFontFactory.createFont("Helvetica");
-	          PdfFont italicFont = PdfFontFactory.createFont("Helvetica-Oblique");
-
-	          // Colors
-	          DeviceRgb darkBlue = new DeviceRgb(54, 79, 107);
-	          DeviceRgb softGray = new DeviceRgb(100, 100, 100);
-	          DeviceRgb lightGray = new DeviceRgb(200, 200, 200);
-
-	          // Add Student Image (if exists)
-	          if (student.getImage() != null) {
-	              Blob imageBlob = student.getImage();
-	              InputStream imageStream = imageBlob.getBinaryStream();
-	              byte[] imageBytes = imageStream.readAllBytes(); // Convert Blob to byte array
-	              ImageData imageData = ImageDataFactory.create(imageBytes); // Create ImageData
-	              Image studentImage = new Image(imageData);
-	              studentImage.setFixedPosition(450, 720) // Top-right corner
-	                          .setWidth(100)
-	                          .setHeight(100);
-	              document.add(studentImage);
-	          }
-
-	          // Title
-	          document.add(new Paragraph(student.getFirstname() + " " + student.getLastname())
-	                  .setFont(titleFont)
-	                  .setFontSize(28)
-	                  .setBold()
-	                  .setTextAlignment(TextAlignment.LEFT)
-	                  .setFontColor(darkBlue)
-	                  .setMarginBottom(20));
-
-	          // Tagline
-	          document.add(new Paragraph(portfolio.getTagline())
-	                  .setFont(titleFont)
-	                  .setFontSize(20)
-	                  .setTextAlignment(TextAlignment.LEFT)
-	                  .setFontColor(softGray)
-	                  .setItalic()
-	                  .setMarginBottom(15));
-
-	          // URL
-	          if (portfolio.getOnlineurl() != null) {
-	              document.add(new Paragraph("Portfolio Link: " + portfolio.getOnlineurl())
-	                      .setFont(textFont)
-	                      .setFontSize(12)
-	                      .setFontColor(softGray)
-	                      .setTextAlignment(TextAlignment.LEFT)
-	                      .setMarginBottom(20));
-	          }
-
-	          // Divider
-	          addDivider(document, lightGray);
-
-	          // Personal Info
-	          document.add(createSectionHeader("Personal Info", sectionFont, darkBlue));
-	          document.add(new Paragraph(portfolio.getInfo())
-	                  .setFont(textFont)
-	                  .setFontSize(12)
-	                  .setFontColor(softGray)
-	                  .setMarginBottom(20));
-
-	          addDivider(document, lightGray);
-
-	          // Skills
-	          document.add(createSectionHeader("Skills", sectionFont, darkBlue));
-	          if (portfolio.getSkills() != null && !portfolio.getSkills().isEmpty()) {
-	              portfolio.getSkills().forEach(skill -> {
-	                  document.add(new Paragraph(skill.getSkillType().getName() + " - " + skill.getPercentage() + "%")
-	                          .setFont(textFont)
-	                          .setFontSize(12)
-	                          .setFontColor(softGray)
-	                          .setMarginBottom(5));
-	              });
-	          } else {
-	              document.add(new Paragraph("No skills listed.")
-	                      .setFont(italicFont)
-	                      .setFontSize(12)
-	                      .setFontColor(softGray));
-	          }
-
-	          addDivider(document, lightGray);
-
-	          // Achievements
-	          document.add(createSectionHeader("Achievements", sectionFont, darkBlue));
-	          addSubsectionHeader("Awards", document, sectionFont, softGray);
-	          portfolio.getAchievements().stream()
-	                  .filter(achievement -> "Award".equals(achievement.getAchievementType().getName()))
-	                  .forEach(achievement -> {
-	                      document.add(new Paragraph("• " + achievement.getTitle())
-	                              .setFont(sectionFont)
-	                              .setFontSize(14)
-	                              .setFontColor(darkBlue));
-	                      document.add(new Paragraph(achievement.getDescription())
-	                              .setFont(textFont)
-	                              .setFontSize(12)
-	                              .setFontColor(softGray)
-	                              .setMarginLeft(20));
-	                  });
-
-	          addSubsectionHeader("Certifications", document, sectionFont, softGray);
-	          portfolio.getAchievements().stream()
-	                  .filter(achievement -> "Certification".equals(achievement.getAchievementType().getName()))
-	                  .forEach(achievement -> {
-	                      document.add(new Paragraph("• " + achievement.getTitle())
-	                              .setFont(sectionFont)
-	                              .setFontSize(14)
-	                              .setFontColor(darkBlue));
-	                      document.add(new Paragraph(achievement.getDescription())
-	                              .setFont(textFont)
-	                              .setFontSize(12)
-	                              .setFontColor(softGray)
-	                              .setMarginLeft(20));
-	                  });
-
-	          addDivider(document, lightGray);
-
-	          // Projects
-	          document.add(createSectionHeader("Projects", sectionFont, darkBlue));
-	          if (portfolio.getSelectedprojects() != null && !portfolio.getSelectedprojects().isEmpty()) {
-	              portfolio.getSelectedprojects().forEach(project -> {
-	                  document.add(new Paragraph("• " + project.getProject().getTitle())
-	                          .setFont(sectionFont)
-	                          .setFontSize(14)
-	                          .setFontColor(darkBlue));
-	                  document.add(new Paragraph(project.getProject().getDescription())
-	                          .setFont(textFont)
-	                          .setFontSize(12)
-	                          .setFontColor(softGray)
-	                          .setMarginLeft(20));
-	              });
-	          } else {
-	              document.add(new Paragraph("No projects listed.")
-	                      .setFont(italicFont)
-	                      .setFontSize(12)
-	                      .setFontColor(softGray));
-	          }
-
-	          // Close document
-	          document.close();
-	      } catch (Exception e) {
-	          e.printStackTrace();
-	      }
-	  }
-	  private void addDivider(Document document, DeviceRgb color) {
-	      LineSeparator line = new LineSeparator(new SolidLine());
-	      line.setBackgroundColor(color);
-	      document.add(line.setMarginTop(10).setMarginBottom(10));
-	  }
-
-	  private Paragraph createSectionHeader(String title, PdfFont font, DeviceRgb color) {
-	      return new Paragraph(title)
-	              .setFont(font)
-	              .setFontSize(18)
-	              .setBold()
-	              .setFontColor(color)
-	              .setMarginBottom(10)
-	              .setMarginTop(20);
-	  }
-
-	  private void addSubsectionHeader(String title, Document document, PdfFont font, DeviceRgb color) {
-	      document.add(new Paragraph(title)
-	              .setFont(font)
-	              .setFontSize(16)
-	              .setBold()
-	              .setFontColor(color)
-	              .setMarginTop(10)
-	              .setMarginBottom(5));
-	  }
+//	  @GetMapping("portfolio-pdf")
+//	  public void generatePortfolioPdf(HttpServletRequest request, HttpServletResponse response) {
+//	      HttpSession session = request.getSession();
+//	      Student student = (Student) session.getAttribute("student");
+//
+//	      try {
+//	          Portfolio portfolio = studentService.findPortfolioByStudent(student);
+//	          response.setContentType("application/pdf");
+//	          response.setHeader("Content-Disposition", "attachment; filename=" + student.getLastname() + "_portfolio.pdf");
+//
+//	          OutputStream out = response.getOutputStream();
+//	          PdfWriter writer = new PdfWriter(out);
+//	          Document document = new Document(new com.itextpdf.kernel.pdf.PdfDocument(writer));
+//
+//	          // Fonts
+//	          PdfFont titleFont = PdfFontFactory.createFont("Helvetica-Bold");
+//	          PdfFont sectionFont = PdfFontFactory.createFont("Helvetica");
+//	          PdfFont textFont = PdfFontFactory.createFont("Helvetica");
+//	          PdfFont italicFont = PdfFontFactory.createFont("Helvetica-Oblique");
+//
+//	          // Colors
+//	          DeviceRgb darkBlue = new DeviceRgb(54, 79, 107);
+//	          DeviceRgb softGray = new DeviceRgb(100, 100, 100);
+//	          DeviceRgb lightGray = new DeviceRgb(200, 200, 200);
+//
+//	          // Add Student Image (if exists)
+//	          if (student.getImage() != null) {
+//	              Blob imageBlob = student.getImage();
+//	              InputStream imageStream = imageBlob.getBinaryStream();
+//	              byte[] imageBytes = imageStream.readAllBytes(); // Convert Blob to byte array
+//	              ImageData imageData = ImageDataFactory.create(imageBytes); // Create ImageData
+//	              Image studentImage = new Image(imageData);
+//	              studentImage.setFixedPosition(450, 720) // Top-right corner
+//	                          .setWidth(100)
+//	                          .setHeight(100);
+//	              document.add(studentImage);
+//	          }
+//
+//	          // Title
+//	          document.add(new Paragraph(student.getFirstname() + " " + student.getLastname())
+//	                  .setFont(titleFont)
+//	                  .setFontSize(28)
+//	                  .setBold()
+//	                  .setTextAlignment(TextAlignment.LEFT)
+//	                  .setFontColor(darkBlue)
+//	                  .setMarginBottom(20));
+//
+//	          // Tagline
+//	          document.add(new Paragraph(portfolio.getTagline())
+//	                  .setFont(titleFont)
+//	                  .setFontSize(20)
+//	                  .setTextAlignment(TextAlignment.LEFT)
+//	                  .setFontColor(softGray)
+//	                  .setItalic()
+//	                  .setMarginBottom(15));
+//
+//	          // URL
+//	          if (portfolio.getOnlineurl() != null) {
+//	              document.add(new Paragraph("Portfolio Link: " + portfolio.getOnlineurl())
+//	                      .setFont(textFont)
+//	                      .setFontSize(12)
+//	                      .setFontColor(softGray)
+//	                      .setTextAlignment(TextAlignment.LEFT)
+//	                      .setMarginBottom(20));
+//	          }
+//
+//	          // Divider
+//	          addDivider(document, lightGray);
+//
+//	          // Personal Info
+//	          document.add(createSectionHeader("Personal Info", sectionFont, darkBlue));
+//	          document.add(new Paragraph(portfolio.getInfo())
+//	                  .setFont(textFont)
+//	                  .setFontSize(12)
+//	                  .setFontColor(softGray)
+//	                  .setMarginBottom(20));
+//
+//	          addDivider(document, lightGray);
+//
+//	          // Skills
+//	          document.add(createSectionHeader("Skills", sectionFont, darkBlue));
+//	          if (portfolio.getSkills() != null && !portfolio.getSkills().isEmpty()) {
+//	              portfolio.getSkills().forEach(skill -> {
+//	                  document.add(new Paragraph(skill.getSkillType().getName() + " - " + skill.getPercentage() + "%")
+//	                          .setFont(textFont)
+//	                          .setFontSize(12)
+//	                          .setFontColor(softGray)
+//	                          .setMarginBottom(5));
+//	              });
+//	          } else {
+//	              document.add(new Paragraph("No skills listed.")
+//	                      .setFont(italicFont)
+//	                      .setFontSize(12)
+//	                      .setFontColor(softGray));
+//	          }
+//
+//	          addDivider(document, lightGray);
+//
+//	          // Achievements
+//	          document.add(createSectionHeader("Achievements", sectionFont, darkBlue));
+//	          addSubsectionHeader("Awards", document, sectionFont, softGray);
+//	          portfolio.getAchievements().stream()
+//	                  .filter(achievement -> "Award".equals(achievement.getAchievementType().getName()))
+//	                  .forEach(achievement -> {
+//	                      document.add(new Paragraph("• " + achievement.getTitle())
+//	                              .setFont(sectionFont)
+//	                              .setFontSize(14)
+//	                              .setFontColor(darkBlue));
+//	                      document.add(new Paragraph(achievement.getDescription())
+//	                              .setFont(textFont)
+//	                              .setFontSize(12)
+//	                              .setFontColor(softGray)
+//	                              .setMarginLeft(20));
+//	                  });
+//
+//	          addSubsectionHeader("Certifications", document, sectionFont, softGray);
+//	          portfolio.getAchievements().stream()
+//	                  .filter(achievement -> "Certification".equals(achievement.getAchievementType().getName()))
+//	                  .forEach(achievement -> {
+//	                      document.add(new Paragraph("• " + achievement.getTitle())
+//	                              .setFont(sectionFont)
+//	                              .setFontSize(14)
+//	                              .setFontColor(darkBlue));
+//	                      document.add(new Paragraph(achievement.getDescription())
+//	                              .setFont(textFont)
+//	                              .setFontSize(12)
+//	                              .setFontColor(softGray)
+//	                              .setMarginLeft(20));
+//	                  });
+//
+//	          addDivider(document, lightGray);
+//
+//	          // Projects
+//	          document.add(createSectionHeader("Projects", sectionFont, darkBlue));
+//	          if (portfolio.getSelectedprojects() != null && !portfolio.getSelectedprojects().isEmpty()) {
+//	              portfolio.getSelectedprojects().forEach(project -> {
+//	                  document.add(new Paragraph("• " + project.getProject().getTitle())
+//	                          .setFont(sectionFont)
+//	                          .setFontSize(14)
+//	                          .setFontColor(darkBlue));
+//	                  document.add(new Paragraph(project.getProject().getDescription())
+//	                          .setFont(textFont)
+//	                          .setFontSize(12)
+//	                          .setFontColor(softGray)
+//	                          .setMarginLeft(20));
+//	              });
+//	          } else {
+//	              document.add(new Paragraph("No projects listed.")
+//	                      .setFont(italicFont)
+//	                      .setFontSize(12)
+//	                      .setFontColor(softGray));
+//	          }
+//
+//	          // Close document
+//	          document.close();
+//	      } catch (Exception e) {
+//	          e.printStackTrace();
+//	      }
+//	  }
+//	  private void addDivider(Document document, DeviceRgb color) {
+//	      LineSeparator line = new LineSeparator(new SolidLine());
+//	      line.setBackgroundColor(color);
+//	      document.add(line.setMarginTop(10).setMarginBottom(10));
+//	  }
+//
+//	  private Paragraph createSectionHeader(String title, PdfFont font, DeviceRgb color) {
+//	      return new Paragraph(title)
+//	              .setFont(font)
+//	              .setFontSize(18)
+//	              .setBold()
+//	              .setFontColor(color)
+//	              .setMarginBottom(10)
+//	              .setMarginTop(20);
+//	  }
+//
+//	  private void addSubsectionHeader(String title, Document document, PdfFont font, DeviceRgb color) {
+//	      document.add(new Paragraph(title)
+//	              .setFont(font)
+//	              .setFontSize(16)
+//	              .setBold()
+//	              .setFontColor(color)
+//	              .setMarginTop(10)
+//	              .setMarginBottom(5));
+//	  }
 
 
 	  
