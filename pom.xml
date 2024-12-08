@@ -14,13 +14,23 @@
 	<packaging>jar</packaging>
 	<name>PROFOLIO</name>
 	<description>SDP PROJECT PROFOLIO</description>
-
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-
 	<dependencies>
-		<!-- Spring Boot Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -29,6 +39,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -36,66 +47,58 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
-
-		<!-- Database Connector -->
-		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- JSP and JSTL -->
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jasper</artifactId>
-			<version>10.1.30</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
-		<!-- PDF Generation -->
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>kernel</artifactId>
-			<version>7.2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>layout</artifactId>
-			<version>7.2.5</version>
-		</dependency>
-
-		<!-- CSV Parsing -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-csv</artifactId>
-			<version>1.9.0</version> <!-- Updated for compatibility -->
-		</dependency>
-
-		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-jasper</artifactId>
+    <version>10.1.30</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
+<dependency>
+    <groupId>org.glassfish.web</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    <version>3.0.0</version><!--$NO-MVN-MAN-VER$-->
+</dependency>
+
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>kernel</artifactId>
+    <version>7.2.5</version>
+</dependency>
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>layout</artifactId>
+    <version>7.2.5</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-csv</artifactId>
+	<version>1.8</version>
+</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -115,4 +118,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
