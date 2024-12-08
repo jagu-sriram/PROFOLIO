@@ -31,15 +31,17 @@ public interface ProjectRepository extends JpaRepository<Project, Integer>
 	@Query("select p from Project p left join fetch p.media where p.id=?1")
 	public Project viewProjectWithMedia(int pid);
 	
-	@Query("select p.id as id, p.title as title, p.datecreated as datecreated, p.status as status, " +
-		       "s.id as studentid, s.lastname as lastname, " +
-		       "COUNT(CASE WHEN m.isReviewed = false THEN 1 END) AS pendingMilestones " +
-		       "from Project p " +
-		       "left join milestones m ON p.id = m.project.id " +
-		       "inner join Student s ON p.student.id = s.id " +
-		       "inner join MentorStudentMapping msm ON msm.student.id = s.id " +
-		       "where msm.mentor=?1 " +
-		       "GROUP by p.id, s.id, s.lastname, p.title, p.datecreated, p.status")
+	@Query("""
+               select p.id as id, p.title as title, p.datecreated as datecreated, p.status as status, \
+               s.id as studentid, s.lastname as lastname, \
+               COUNT(CASE WHEN m.isReviewed = false THEN 1 END) AS pendingMilestones \
+               from Project p \
+               left join milestones m ON p.id = m.project.id \
+               inner join Student s ON p.student.id = s.id \
+               inner join MentorStudentMapping msm ON msm.student.id = s.id \
+               where msm.mentor=?1 \
+               GROUP by p.id, s.id, s.lastname, p.title, p.datecreated, p.status\
+               """)
 	public List<Object[]> viewprojectswithmilestonestatus(Mentor m);
 	
 	@Query("select count(p) from Project p where p.student=?1")
