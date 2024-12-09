@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.klef.jfsd.sdp.model.Admin;
-//import com.klef.jfsd.sdp.model.CsvUtility;
-//import com.klef.jfsd.sdp.model.CsvUtilityForMentor;
+import com.klef.jfsd.sdp.model.CsvUtility;
+import com.klef.jfsd.sdp.model.CsvUtilityForMentor;
 import com.klef.jfsd.sdp.model.Media;
 import com.klef.jfsd.sdp.model.Mentor;
 import com.klef.jfsd.sdp.model.MentorStudentMapping;
@@ -197,27 +197,27 @@ public class AdminServiceImpl implements AdminService
 		return mentorStudentMappingRepository.checkstudent(s);
 	}
 
-//	public String saveStudentcsv(MultipartFile file) {
-//	    try {
-//	      List < Student > stuList = CsvUtility.csvToStuList(file.getInputStream());
-//	      studentRepository.saveAll(stuList);
-//	      return "Student(s) added successfully";
-//	    } catch (IOException ex) {
-//	      throw new RuntimeException("Data is not store successfully: " + ex.getMessage());
-//	    }
-//	  }
+	public String saveStudentcsv(MultipartFile file) {
+	    try {
+	      List < Student > stuList = CsvUtility.csvToStuList(file.getInputStream());
+	      studentRepository.saveAll(stuList);
+	      return "Student(s) added successfully";
+	    } catch (IOException ex) {
+	      throw new RuntimeException("Data is not store successfully: " + ex.getMessage());
+	    }
+	  }
 
-//	@Override
-//	public String saveMentorcsv(MultipartFile file) 
-//	{
-//		 try {
-//		      List < Mentor > mentorlist = CsvUtilityForMentor.csvToMentorList(file.getInputStream());
-//		      mentorRepository.saveAll(mentorlist);
-//		      return "Mentor(s) added successfully";
-//		    } catch (IOException ex) {
-//		      throw new RuntimeException("Data is not store successfully: " + ex.getMessage());
-//		    }
-//	}
+	@Override
+	public String saveMentorcsv(MultipartFile file) 
+	{
+		 try {
+		      List < Mentor > mentorlist = CsvUtilityForMentor.csvToMentorList(file.getInputStream());
+		      mentorRepository.saveAll(mentorlist);
+		      return "Mentor(s) added successfully";
+		    } catch (IOException ex) {
+		      throw new RuntimeException("Data is not store successfully: " + ex.getMessage());
+		    }
+	}
 	
 	
 	

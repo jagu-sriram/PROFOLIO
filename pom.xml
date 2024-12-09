@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.6</version>
+		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.klef.jfsd.sdp</groupId>
@@ -76,10 +76,11 @@
 <!-- https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
 <dependency>
     <groupId>org.glassfish.web</groupId>
-    <artifactId>jakarta.servlet.jsp.jstl</artifactId><!--$NO-MVN-MAN-VER$-->
+    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    <version>3.0.0</version><!--$NO-MVN-MAN-VER$-->
 </dependency>
 
-<!--<dependency>
+<dependency>
     <groupId>com.itextpdf</groupId>
     <artifactId>kernel</artifactId>
     <version>7.2.5</version>
@@ -94,7 +95,7 @@
 	<artifactId>commons-csv</artifactId>
 	<version>1.8</version>
 </dependency>
--->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>

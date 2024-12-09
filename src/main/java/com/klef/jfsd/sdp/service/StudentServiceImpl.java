@@ -148,31 +148,13 @@ public class StudentServiceImpl implements StudentService
 	}
 
 
-//	@Override
-//	public String addSkill(Skill skill) {
-//		skillRepository.save(skill);
-//		return "Skill Added Successfully";
-//	}
-//
-//
-//	@Override
-//	public String addAchievement(Achievement achievement) {
-//		achievementRepository.save(achievement);
-//		return "Record Added Successfully";
-//	}
-//
-//
 	@Override
 	public List<SkillType> displayAllSkillTypes() {
 		return skillTypeRepository.findAll();
 	}
-//
-//
-//	@Override
-//	public SkillType getSkillTypeByName() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
+
+	
 
 
 	@Override

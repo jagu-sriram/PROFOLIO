@@ -40,7 +40,7 @@ public interface AdminService
 	public long checkMentorStudentMapping(Mentor m,Student s);
 	public long checkstudent(Student s);
 	
-//	public String saveStudentcsv(MultipartFile file);
-//	public String saveMentorcsv(MultipartFile file);
+	public String saveStudentcsv(MultipartFile file);
+	public String saveMentorcsv(MultipartFile file);
 	
 }
