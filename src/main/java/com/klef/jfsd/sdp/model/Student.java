@@ -50,6 +50,9 @@ public class Student
 
 	@OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
 	private Portfolio portfolio;
+	
+	@OneToMany(mappedBy="student",cascade = CascadeType.ALL)
+	private List<MentorStudentMapping> mappings;
 
 	public String getDepartment() {
 		return department;

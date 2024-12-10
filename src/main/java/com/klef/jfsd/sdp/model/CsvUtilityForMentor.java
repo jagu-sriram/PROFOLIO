@@ -34,10 +34,10 @@ public class CsvUtilityForMentor {
               mentor.setId(Integer.parseInt(csvRecord.get("Id")));
               mentor.setFirstname(csvRecord.get("First Name"));
               mentor.setLastname(csvRecord.get("Last Name"));
-              mentor.setGender(csvRecord.get("Gender"));
+              mentor.setGender(csvRecord.get("Gender").toUpperCase());
               mentor.setDateofBirth(csvRecord.get("Date of birth"));
               mentor.setQualification(csvRecord.get("Qualification"));
-              mentor.setDepartment(csvRecord.get("Department"));
+              mentor.setDepartment(csvRecord.get("Department").toLowerCase());
               mentor.setDesignation(csvRecord.get("Designation"));
               mentor.setExperience(Float.parseFloat(csvRecord.get("Experience")));
               mentor.setEmail(csvRecord.get("Email"));

@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    
     <%
 Admin a = (Admin) session.getAttribute("admin");
 
@@ -34,9 +36,9 @@ if (a == null) {
 
         <section class="container">
             <header>Register Mentor</header>
-            <h4 align="center" style="color:green">
+            <h4 align="center" style="${fn:contains(message, 'successfully') ? 'color:green' : 'color:red'}">
     <c:out value="${message}"></c:out>
-    </h4>
+</h4>
             <form action="insertmentor" method="post" class="form" enctype="multipart/form-data">
             <div class="input-box">
                 <label>ID</label>

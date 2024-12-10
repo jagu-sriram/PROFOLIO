@@ -1,6 +1,5 @@
 package com.klef.jfsd.sdp.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +16,11 @@ public class MentorStudentMapping
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int mappingid;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "mentor_id") // foreign key column name
 	private Mentor mentor;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "student_id") // foreign key column name
 	private Student student;
 

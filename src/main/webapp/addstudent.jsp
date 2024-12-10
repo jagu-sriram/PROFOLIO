@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@page import="com.klef.jfsd.sdp.model.Admin"%>
     <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <%
 Admin a = (Admin) session.getAttribute("admin");
 
@@ -34,9 +35,9 @@ if (a == null) {
 
         <section class="container">
             <header>Register Student</header>
-            <h4 align="center" style="color:green">
+            <h4 align="center" style="${fn:contains(message, 'successfully') ? 'color:green' : 'color:red'}">
     <c:out value="${message}"></c:out>
-    </h4>
+</h4>
             <form action="insertstudent" method="post" class="form">
             <div class="column">
               <div class="input-box">

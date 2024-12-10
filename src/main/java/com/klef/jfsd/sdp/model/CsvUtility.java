@@ -37,10 +37,10 @@ public class CsvUtility {
                 
                 stu.setFirstname(csvRecord.get("First Name"));
                 stu.setLastname(csvRecord.get("Last Name"));
-                stu.setGender(csvRecord.get("Gender"));
+                stu.setGender(csvRecord.get("Gender").toUpperCase());
                 stu.setDateofBirth(csvRecord.get("Date of birth"));
                 stu.setAge(Float.parseFloat(csvRecord.get("Age")));
-                stu.setDepartment(csvRecord.get("Department"));
+                stu.setDepartment(csvRecord.get("Department").toLowerCase());
                 stu.setEmail(csvRecord.get("Email"));
                 stu.setPassword(csvRecord.get("Date of birth"));
                 stu.setContact(csvRecord.get("Contact"));

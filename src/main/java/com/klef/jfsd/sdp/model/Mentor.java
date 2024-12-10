@@ -48,6 +48,8 @@ public class Mentor
 	@OneToMany(mappedBy = "mentor",cascade = CascadeType.ALL)
 	private List<PortfolioFeedback> portfolioFeedbacks;
 	
+	@OneToMany(mappedBy="mentor",cascade = CascadeType.ALL)
+	private List<MentorStudentMapping> mappings;
 	
 	public int getId() {
 		return id;

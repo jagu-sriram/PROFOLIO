@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,12 +57,28 @@ public class AdminServiceImpl implements AdminService
 	}
 
 	@Override
-	public String addstudent(Student student) 
-	{
-		studentRepository.save(student);
-		return "Student addedd successfully";
-		
+	public String addstudent(Student student) {
+	    try {
+	        studentRepository.save(student);
+	        return "Student added successfully";
+	    } catch (DataIntegrityViolationException e) {
+	        // Extract the root cause message
+	        String message = e.getRootCause().getMessage();
+	        if (message.contains("Duplicate entry")) {
+	            if (message.contains("email")) {
+	                return "Error: Email already exists!";
+	            } else if (message.contains("contact")) {
+	                return "Error: Contact number already exists!";
+	            } else if (message.contains("PRIMARY")) {
+	                return "Error: Student ID already exists!";
+	            }
+	        }
+	        return "Error: Unable to add student due to database constraint violation.";
+	    } catch (Exception e) {
+	        return "Error: An unexpected error occurred while adding the student.";
+	    }
 	}
+
 
 	@Override
 	public List<Student> viewallstudents() {
@@ -131,11 +148,28 @@ public class AdminServiceImpl implements AdminService
 	}
 
 	@Override
-	public String addMentor(Mentor mentor) 
-	{
-		mentorRepository.save(mentor);
-		return "Mentor added successfully";
+	public String addMentor(Mentor mentor) {
+	    try {
+	        mentorRepository.save(mentor);
+	        return "Mentor added successfully";
+	    } catch (DataIntegrityViolationException e) {
+	        // Extract the root cause message
+	        String message = e.getRootCause().getMessage();
+	        if (message.contains("Duplicate entry")) {
+	            if (message.contains("email")) {
+	                return "Error: Email already exists!";
+	            } else if (message.contains("contact")) {
+	                return "Error: Contact number already exists!";
+	            } else if (message.contains("PRIMARY")) {
+	                return "Error: Mentor ID already exists!";
+	            }
+	        }
+	        return "Error: Unable to add mentor due to database constraint violation.";
+	    } catch (Exception e) {
+	        return "Error: An unexpected error occurred while adding the mentor.";
+	    }
 	}
+
 
 	@Override
 	public List<Mentor> viewAllMentors() {
