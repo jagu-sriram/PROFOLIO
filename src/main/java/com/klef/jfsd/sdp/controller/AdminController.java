@@ -105,7 +105,7 @@ public class AdminController
 	  }
 	
 	@PostMapping("insertstudent")
-	  public ModelAndView insertstudent(HttpServletRequest request) 
+	  public ModelAndView insertstudent(HttpServletRequest request) throws ParseException 
 	  {
 		
 		 
@@ -316,7 +316,7 @@ public class AdminController
 	    return mv;          
 	  }
 	  
-	  @PostMapping("insertmentor")
+	  @PostMapping("insertmentor") throws ParseException 
 	  public ModelAndView insertmentor(HttpServletRequest request) 
 	  {
 		 
