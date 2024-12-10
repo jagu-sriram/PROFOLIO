@@ -316,8 +316,8 @@ public class AdminController
 	    return mv;          
 	  }
 	  
-	  @PostMapping("insertmentor") throws ParseException 
-	  public ModelAndView insertmentor(HttpServletRequest request) 
+	  @PostMapping("insertmentor")
+	  public ModelAndView insertmentor(HttpServletRequest request) throws ParseException 
 	  {
 		 
 		 int id =Integer.parseInt(request.getParameter("mid")) ;
