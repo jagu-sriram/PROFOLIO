@@ -52,32 +52,7 @@ public class MentorController
 	@Autowired
 	private MentorService mentorService;
 	
-//	@PostMapping("checkmentorlogin")
-//	@ResponseBody
-//	public ModelAndView checkmentorlogin(HttpServletRequest request)
-//	{
-//		ModelAndView mv=new ModelAndView();
-//		String email = request.getParameter("memail");
-//		String password = request.getParameter("mpwd");
-//		Mentor m = mentorService.checkmentorlogin(email, password);
-//		if(m!=null) 
-//		{
-//			// session
-//			HttpSession session = request.getSession();
-//			session.setAttribute("mentor", m); // mentor is session variable
-//			
-//			//session.setMaxInactiveInterval(5);
-//			
-//			mv.setViewName("mentorhome");
-//		}
-//		else
-//		{
-//			mv.setViewName("login");
-//			mv.addObject("message", "Login Failed");
-//		}
-//		return mv;
-//		
-//	}
+/*<---------------------------------Mentor Home-------------------------------------------->*/
 	
 	@GetMapping("mentorhome")
 	public ModelAndView mentorhome(HttpServletRequest request)
@@ -104,6 +79,83 @@ public class MentorController
 		return mv;
 	}
 	
+//	<----------------------------Profile and updation----------------------------->
+
+	  @GetMapping("mentorprofile")
+	  public ModelAndView mentorprofile()
+	  {
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("mentorprofile");
+	    return mv;
+	  } 
+	  
+	  
+	  @GetMapping("updatemyprofile")
+	  public ModelAndView updateprofile()
+	  {
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("updatementorprofile");
+	    return mv;
+	  } 
+	  
+	  @PostMapping("updatementorprofile")
+	  public ModelAndView updatementorprofile(HttpServletRequest request) throws Exception
+	  {
+		  
+		  ModelAndView mv = new ModelAndView();
+		  
+		  try {
+			  int id = Integer.parseInt(request.getParameter("mid"));
+			  String firstname = request.getParameter("fname");
+			  String lastname = request.getParameter("lname");
+			  String gender = request.getParameter("mgender");
+			  String dob = request.getParameter("mdob");
+			  String dept = request.getParameter("mdept");
+			  String designation = request.getParameter("mdesognation");
+			  String qualification = request.getParameter("mqualification");
+			  float exp = Float.parseFloat(request.getParameter("mexp"));
+			  String email = request.getParameter("memail");
+			  String password = request.getParameter("mpwd");
+			  String contact = request.getParameter("mcontact");
+			  
+			  Mentor m = new Mentor();
+			  m.setId(id);
+			  m.setFirstname(firstname);
+			  m.setLastname(lastname);
+			  m.setGender(gender);
+			  m.setDateofBirth(dob);
+			  m.setDepartment(dept);
+			  m.setDesignation(designation);
+			  m.setQualification(qualification);
+			  m.setExperience(exp);
+			  m.setEmail(email);
+			  m.setPassword(password);
+			  m.setContact(contact);
+			 
+			  
+			  
+			  String msg = mentorService.updatementorprofile(m);
+			  
+			  Mentor mn = mentorService.displayMentorbyID(id);
+			  
+			  HttpSession session = request.getSession();
+			  session.setAttribute("mentor",mn);
+			  
+			  mv.setViewName("updatementorprofile");
+			  mv.addObject("message",msg);
+			  
+		  }
+		  catch(Exception e) {
+			  mv.setViewName("updatementorprofile");
+			  mv.addObject("message",e);
+		  }
+		return mv;
+	  }
+	
+	
+	
+//	<--------------------------------------View Students------------------------->
+	
 	@GetMapping("viewstudents")
 	public ModelAndView viewstudents(HttpSession session)
 	{
@@ -115,6 +167,8 @@ public class MentorController
 		
 		return mv;
 	}
+	
+//	<-------------------------------------------------View Projects------------------------------>
 	
 	@GetMapping("viewallprojects")
 	public ModelAndView viewallprojects(HttpSession session)
@@ -173,6 +227,8 @@ public class MentorController
 		  return mv;
 	  }
 	  
+//	  <-------------------------------Project feedback-------------------------------------->
+	  
 	  @GetMapping("projectfeedbackform")
 	  public ModelAndView projectfeedbackform(@RequestParam("id") int pid)
 	  {
@@ -221,6 +277,8 @@ public class MentorController
 		  
 	  }
 	  
+//	  <--------------------------------------View portfolio--------------------------------->
+	  
 	  @GetMapping("viewallportfolios")
 		public ModelAndView viewallportfolios(HttpSession session)
 		{
@@ -252,6 +310,8 @@ public class MentorController
 		  mv.addObject("portfolio", portfolio);
 		  return mv;
 	  }
+	  
+//	  <--------------------------------------Portfolio feedback-------------------------------->
 	  
 	  @GetMapping("portfoliofeedbackform")
 	  public ModelAndView portfoliofeedbackform(@RequestParam("id") int pid)
@@ -291,6 +351,8 @@ public class MentorController
 		  
 		  
 	  }
+	  
+//		<-------------------------------------------------Review Milestones------------------------------>
 	  
 	  @GetMapping("reviewmilestones")
 	  public ModelAndView viewprojectsformilestonereview(HttpSession session)
@@ -357,6 +419,9 @@ public class MentorController
 		  mv.addObject("message",msg);
 		  return mv;
 	  }
+	  
+	  
+//		<-------------------------------------------------View Porposed Milestones------------------------------>
 	  
 	  @GetMapping("viewallproposedmilestones")
 	  public ModelAndView viewproposedmilestones(HttpSession session)
@@ -430,25 +495,10 @@ public class MentorController
 		  return "redirect:/viewprojectwithmilestonesbymentor?id="+customMilestone.getProject().getId(); 
 	  }
 	  
-	  @GetMapping("mentorprofile")
-	  public ModelAndView mentorprofile()
-	  {
-	    ModelAndView mv = new ModelAndView();
-	    mv.setViewName("mentorprofile");
-	    return mv;
-	  } 
 	  
-	  @GetMapping("mentorlogout")
-	  public ModelAndView logout(HttpServletRequest request)
-	  {
-		HttpSession session = request.getSession();
-		session.removeAttribute("mentor");
-		
-	    ModelAndView mv=new ModelAndView();
-	    mv.setViewName("login");
-	    return mv;
-	  }
 	  
+	  
+//		<-------------------------------------------------Download Resume------------------------------>
 	  
 	  @GetMapping("portfolio-pdf-dowload")
 	  public void generatePortfolioPdf(@RequestParam("id") int pid,HttpServletRequest request, HttpServletResponse response) {
@@ -634,5 +684,19 @@ public class MentorController
 	              .setFontColor(color)
 	              .setMarginTop(10)
 	              .setMarginBottom(5));
+	  }
+	  
+	  
+//		<-------------------------------------------------Logout------------------------------>
+	  
+	  @GetMapping("mentorlogout")
+	  public ModelAndView logout(HttpServletRequest request)
+	  {
+		HttpSession session = request.getSession();
+		session.removeAttribute("mentor");
+		
+	    ModelAndView mv=new ModelAndView();
+	    mv.setViewName("login");
+	    return mv;
 	  }
 }

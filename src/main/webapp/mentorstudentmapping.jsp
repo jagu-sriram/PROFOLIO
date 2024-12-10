@@ -1,8 +1,20 @@
 <%@page import="com.klef.jfsd.sdp.model.Student"%>
+<%@page import="com.klef.jfsd.sdp.model.Admin"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-
+     <%
+     Admin a = (Admin) session.getAttribute("admin");
+     
+     if (a == null) {
+     %>
+         <script type="text/javascript">
+             alert("Session Expired. Please Login Again");
+             window.location.href = "login"; 
+         </script>
+     <%
+         } else {
+     %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,3 +66,6 @@
     <script src="../script.js"></script>
   </body>
 </html>
+<%
+         }
+%>

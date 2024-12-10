@@ -7,7 +7,7 @@
 %>
 <script type="text/javascript">
     alert("Session Expired. Please Login Again");
-    window.location.href = "login.jsp"; // Adjust this path to your login page
+    window.location.href = "login"; // Adjust this path to your login page
 </script>
 <%
     } else {
@@ -125,22 +125,22 @@
                 </div>
                 <div class="input-box">
                     <label>Birth Date</label>
-                    <input type="date" name="sdob" readonly value="<%=s.getDateofBirth()%>" required />
+                    <input type="text" name="sdob" readonly value="<%=s.getDateofBirth()%>" required />
                 </div>
             </div>
             <div class="gender-box">
                 <h3>Gender</h3>
                 <div class="gender-option">
                     <div class="gender">
-                        <input type="radio" id="check-male" name="sgender" value="MALE" <%= s.getGender().equals("MALE") ? "checked" : "" %> />
+                        <input type="radio" id="check-male" disabled name="sgender" value="MALE" <%= s.getGender().equals("MALE") ? "checked" : "" %> />
                         <label for="check-male">Male</label>
                     </div>
                     <div class="gender">
-                        <input type="radio" id="check-female" name="sgender" value="FEMALE" <%= s.getGender().equals("FEMALE") ? "checked" : "" %> />
+                        <input type="radio" id="check-female" disabled name="sgender" value="FEMALE" <%= s.getGender().equals("FEMALE") ? "checked" : "" %> />
                         <label for="check-female">Female</label>
                     </div>
                     <div class="gender">
-                        <input type="radio" id="check-other" name="sgender" value="OTHERS" <%= s.getGender().equals("OTHERS") ? "checked" : "" %> />
+                        <input type="radio" id="check-other" disabled name="sgender" value="OTHERS" <%= s.getGender().equals("OTHERS") ? "checked" : "" %> />
                         <label for="check-other">Prefer not to say</label>
                     </div>
                 </div>

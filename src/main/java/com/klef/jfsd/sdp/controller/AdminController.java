@@ -114,17 +114,19 @@ public class AdminController
 		 float age = Float.parseFloat(request.getParameter("sage"));
 		 String dob = request.getParameter("sdob");
 		 
-//		 SimpleDateFormat input = new SimpleDateFormat("dd-MM-yyyy");
-//		 
-//		 Date dateValue = input.parse(dob);
-//		 SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy");
-//		 String dateofbirth = output.format(dateValue);
+		
+		 SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
+         Date date = originalFormat.parse(dob);
+
+         // Format the Date object into the desired format
+         SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-yyyy");
+         String formattedDob = newFormat.format(date);
 		 
 		 String gender = request.getParameter("sgender");
 		 String dept = request.getParameter("sdept");
 		 String email = request.getParameter("semail");
 		 String contact = request.getParameter("scontact");
-		 String password =dob;
+		 String password =formattedDob;
 		 
 		 
 		 
@@ -132,7 +134,7 @@ public class AdminController
 		 s.setFirstname(fname);
 		 s.setLastname(lname);
 		 s.setAge(age);
-		 s.setDateofBirth(dob);
+		 s.setDateofBirth(formattedDob);
 		 s.setGender(gender);
 		 s.setDepartment(dept);
 		 s.setEmail(email);
@@ -321,7 +323,15 @@ public class AdminController
 		 int id =Integer.parseInt(request.getParameter("mid")) ;
 		 String fname = request.getParameter("fname");
 		 String lname = request.getParameter("lname");
+		 
 		 String dob = request.getParameter("mdob");
+		 SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
+         Date date = originalFormat.parse(dob);
+
+         // Format the Date object into the desired format
+         SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-yyyy");
+         String formattedDob = newFormat.format(date);
+         
 		 String gender = request.getParameter("mgender");
 		 String dept = request.getParameter("mdept");
 		 String qualification = request.getParameter("qualification");
@@ -329,7 +339,7 @@ public class AdminController
 		 float expereince=Float.parseFloat(request.getParameter("mexp")) ;
 		 String email = request.getParameter("memail");
 		 String contact = request.getParameter("mcontact");
-		 String password =dob;
+		 String password =formattedDob;
 		 
 		 
 		 
@@ -337,7 +347,7 @@ public class AdminController
 		 m.setId(id);
 		 m.setFirstname(fname);
 		 m.setLastname(lname);
-		 m.setDateofBirth(dob);
+		 m.setDateofBirth(formattedDob);
 		 m.setGender(gender);
 		 m.setDepartment(dept);
 		 m.setQualification(qualification);

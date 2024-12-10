@@ -1,5 +1,17 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@page import="com.klef.jfsd.sdp.model.Admin"%>
+<%
+Admin a = (Admin) session.getAttribute("admin");
 
+if (a == null) {
+%>
+    <script type="text/javascript">
+        alert("Session Expired. Please Login Again");
+        window.location.href = "login"; 
+    </script>
+<%
+    } else {
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -50,3 +62,6 @@
     </div>
 </body>
 </html>
+<%
+    }
+%>

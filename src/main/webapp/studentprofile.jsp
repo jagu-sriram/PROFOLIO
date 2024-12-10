@@ -7,7 +7,7 @@
 %>
 <script type="text/javascript">
     alert("Session Expired. Please Login Again");
-    window.location.href = "login.jsp"; // Adjust this path to your login page
+    window.location.href = "login"; // Adjust this path to your login page
 </script>
 <%
     } else {
