@@ -55,4 +55,7 @@ public interface MentorService
 	public String addPortfolioFeedback(PortfolioFeedback portfolioFeedback);
 	public Portfolio viewPortfolioById(int pid);
 	
+	public String updatementorprofile(Mentor mentor);
+	public Mentor displayMentorbyID(int mid);
+	
 }

@@ -299,4 +299,23 @@ public class MentorServiceImpl implements MentorService
 	public Project saveProject(Project project) {
 		return projectRepository.save(project);
 	}
+
+	@Override
+	public String updatementorprofile(Mentor mentor) 
+	{
+		Mentor s = mentorRepository.findById(mentor.getId()).get();
+		
+		
+		s.setPassword(mentor.getPassword());
+		
+        mentorRepository.save(s);
+		
+		return "Profile updated successfully";
+	}
+
+	@Override
+	public Mentor displayMentorbyID(int mid) 
+	{
+		return mentorRepository.findById(mid).get();
+	}
 }
