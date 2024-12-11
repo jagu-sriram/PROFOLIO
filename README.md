@@ -61,7 +61,3 @@ This platform provides a single sign-in page for all users (Admin, Mentor, and S
 2. **Mentor Login:** Review and provide feedback on student projects and portfolios. Monitor project progress through milestones and review progress.
 3. **Student Login:** Upload projects, manage portfolios, and track milestones.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-
