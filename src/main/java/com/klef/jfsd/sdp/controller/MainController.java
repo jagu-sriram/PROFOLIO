@@ -74,7 +74,7 @@ public class MainController
 		{
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("mentor", mentor); // mentor is session variable
+			session.setAttribute("mentor", mentor);
 			
 			mv.setViewName("redirect:/mentorhome");
 			return mv;
@@ -83,7 +83,6 @@ public class MainController
 	  Student student=studentService.checkStudentLogin(identifier, password);
 	  if(student!=null) 
 		{
-			// session
 			HttpSession session = request.getSession();
 			session.setAttribute("student", student); 
 			
@@ -114,7 +113,7 @@ public class MainController
   MimeMessage mimeMessage = mailSender.createMimeMessage();
   MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-  int otp = (int)(Math.random() * 99999); // random number generation
+  int otp = (int)(Math.random() * 99999); 
   helper.setTo("shaiknusratraheel@gmail.com");
   helper.setFrom(fromEmail);
   String htmlContent =
