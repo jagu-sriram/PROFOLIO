@@ -66,30 +66,6 @@ public class AdminController
 	  }
 	
 	
-//	@PostMapping("checkadminlogin")
-//	@ResponseBody
-//	public ModelAndView checkadminlogin(HttpServletRequest request)
-//	{
-//		String uname = request.getParameter("auname");
-//		String apwd = request.getParameter("apwd");
-//		
-//		Admin admin =  adminService.checkadminlogin(uname, apwd);
-//		ModelAndView mv = new ModelAndView();
-//		
-//		if(admin!=null)
-//		{
-//			 mv.setViewName("adminhome");
-//			 return mv;
-//		}
-//		else
-//		{
-//			mv.setViewName("login");
-//			return mv;
-//		}
-//		
-//	}
-	
-	
 	@GetMapping("addstudent")
 	  public ModelAndView addstudent(HttpSession session)
 	  {
